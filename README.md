@@ -52,7 +52,7 @@ Redis server needs to be live when using the decorator or while running the test
 
 ### Installing dependencies 
 
-Create a virtual environment if you want and install the dependencies.
+Create a virtual environment and install the dependencies.
 
 #### Creating virtual env and activating it -
 
