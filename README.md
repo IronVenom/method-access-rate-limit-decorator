@@ -1,2 +1,1 @@
-# custom-rate-limit-annotation
-Python annotation for applying custom rate limits for access on methods
+Implementation of a decorator for applying access rate limits to methods based on an unique identifier.
