@@ -1,5 +1,4 @@
 import redis
-import logging
 
 from .custom_rate_limit_config import *
 from .custom_rate_limit_errors import *
@@ -56,12 +55,8 @@ def CustomRateLimit(function):
         rate_limit_amount = int(rate_limit_config.get(RATE_LIMIT_AMOUNT, 0))
         rate_limit_expiry = int(rate_limit_config.get(RATE_LIMIT_EXPIRY, 0))
         if unique_identifier_key is None or unique_identifier_value is None or rate_limit_amount <= 0 or rate_limit_expiry <= 0:
-            logging.warning(
-                "CustomRateLimit :: Decorator applied but no config sent, granting access to method")
             return function(*args, **kwargs)
         elif rate_limit_amount <= 0 or rate_limit_expiry <= 0:
-            logging.warning(
-                "CustomRateLimit :: Rate limit amount or expiry is less than or equal to zero, granting access to function")
             return function(*args, **kwargs)
         elif check_attempts(unique_identifier_key, unique_identifier_value, rate_limit_amount, rate_limit_expiry):
             return function(*args, **kwargs)
