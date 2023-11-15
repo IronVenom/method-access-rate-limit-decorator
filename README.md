@@ -104,6 +104,6 @@ It has two cases -
 | 1 | 0.036661624908447266 | 0.8354330062866211 | 22.787669896598818 |
 | 2 | 0.03400643666585287 | 0.9099038441975912 | 26.75681233933162 |
 
-Case 2 has more average time due to since there is an extra set call being made on every method call since rate limit data always expires by the time next call comes. 
+Case 2 has more average time since there is an extra cache set call being made on every method call since rate limit data always expires by the time next call comes. 
 
 Note that the results might slightly defer if you run the benchmark script again.
