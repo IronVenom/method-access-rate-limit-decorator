@@ -85,8 +85,6 @@ pytest --no-header -v test.py
 
 There is an overhead cost if the rate limit decorator is used - it will increase the response time of the method on which it is applied. The cost will be highest for the first call that is made to any method that uses the decorator, since it will be responsible for connecting to Redis. This will only happen once. After that all calls will use the same shared Redis cache instance.
 
-
-
 ### Running benchmark script
 
 Following command is to be run in project root directory - 
@@ -94,3 +92,18 @@ Following command is to be run in project root directory -
 ```
 python3 benchmark.py
 ```
+It has two cases - 
+
+1. Method calls (total 300) done at 2s intervals, rate limit expiry is 8s with 2 attempts; Rate limit hits twice in a 8s period
+2. Method calls (total 300) done at 2s intervals, rate limit expiry is 2s with 2 attempts; Rate limit is never hit
+
+#### Results 
+
+| Case | Average response time without rate limit decorator (ms) | Average response time with rate limit decorator (ms) | Response time ratio |
+| :---:| :---:| :---:| :---:| 
+| 1 | 0.036661624908447266 | 0.8354330062866211 | 22.787669896598818 |
+| 2 | 0.03400643666585287 | 0.9099038441975912 | 26.75681233933162 |
+
+Case 2 has more average time due to since there is an extra set call being made on every method call since rate limit data always expires by the time next call comes. 
+
+Note that the results might slightly defer if you run the benchmark script again.
