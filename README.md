@@ -9,6 +9,10 @@ Some use cases where it can be used -
 Here's  a simple example -
 
 ```python
+from custom_rate_limit_decorator.custom_rate_limit import CustomRateLimit
+from custom_rate_limit_decorator.custom_rate_limit_config import UNIQUE_IDENTIFIER_KEY, UNIQUE_IDENTIFIER_VALUE, RATE_LIMIT_AMOUNT, RATE_LIMIT_EXPIRY
+from custom_rate_limit_decorator.custom_rate_limit_errors import RateLimitApplied
+
 def rate_limit_config(method_identifier, unique_identifier, value, rate_limit_amount, rate_limit_expiry):
 
     ratelimitcheck_conf = {}
